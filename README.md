@@ -7,5 +7,5 @@ Création d'un character avec mouvement dans 4 directions avec animations et col
 Tilemap ressources:
 https://pixel-poem.itch.io/dungeon-assetpuck
 
-Animation sprite
+Animation sprite:
 N/A google search :)
