@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 [GlobalClass]
-public partial class GameManager : MainLoop
+public partial class GameManager : SceneTree
 {
 	private double _timeElapsed = 0;
 	
