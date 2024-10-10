@@ -2,10 +2,10 @@
 Travail 1 
 Cours 8PRO135
 
-Création d'un character avec mouvement dans 4 directions avec animations et collisions de coutour de map.
+Création d'un character avec mouvement dans 4 directions avec animations et collisions de contour de map.
 
 Tilemap ressources:
 https://pixel-poem.itch.io/dungeon-assetpuck
 
-Animation sprite
+Animation sprite:
 N/A google search :)
