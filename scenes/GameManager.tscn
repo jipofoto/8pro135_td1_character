@@ -1,11 +1,11 @@
 [gd_scene load_steps=8 format=3 uid="uid://cnvh6qdsv5n3f"]
 
-[ext_resource type="Texture2D" uid="uid://3lqxdi8wgf6g" path="res://assets/Dungeon_Tileset.png" id="1_f4ium"]
-[ext_resource type="Script" path="res://scripts/game.gd" id="1_h0ylf"]
-[ext_resource type="PackedScene" uid="uid://irv4jj3rbfkb" path="res://scenes/character.tscn" id="2_jqy3n"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_k3qt3"]
+[ext_resource type="Texture2D" uid="uid://3lqxdi8wgf6g" path="res://assets/Dungeon_Tileset.png" id="2_6sgvy"]
+[ext_resource type="PackedScene" uid="uid://irv4jj3rbfkb" path="res://scenes/character.tscn" id="3_55s2h"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_unopi"]
-texture = ExtResource("1_f4ium")
+texture = ExtResource("2_6sgvy")
 0:0/0 = 0
 0:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 1:0/0 = 0
@@ -147,7 +147,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_unopi")
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_sihgk"]
-texture = ExtResource("1_f4ium")
+texture = ExtResource("2_6sgvy")
 0:0/0 = 0
 1:0/0 = 0
 2:0/0 = 0
@@ -252,8 +252,8 @@ texture = ExtResource("1_f4ium")
 [sub_resource type="TileSet" id="TileSet_8nhnd"]
 sources/0 = SubResource("TileSetAtlasSource_sihgk")
 
-[node name="Game" type="Node"]
-script = ExtResource("1_h0ylf")
+[node name="GameManager" type="Node"]
+script = ExtResource("1_k3qt3")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_ka2id")
@@ -264,5 +264,5 @@ layer_0/tile_data = PackedInt32Array(0, 0, 0, 65536, 0, 1, 131072, 0, 2, 196608,
 tile_map_data = PackedByteArray(0, 0, 8, 0, 1, 0, 0, 0, 4, 0, 8, 0, 0, 0)
 tile_set = SubResource("TileSet_8nhnd")
 
-[node name="Character" parent="." instance=ExtResource("2_jqy3n")]
+[node name="Character" parent="." instance=ExtResource("3_55s2h")]
 position = Vector2(361, 283)
