@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://cnvh6qdsv5n3f"]
+[gd_scene load_steps=9 format=3 uid="uid://cnvh6qdsv5n3f"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_6363p"]
 [ext_resource type="Texture2D" uid="uid://3lqxdi8wgf6g" path="res://assets/Dungeon_Tileset.png" id="2_1fauo"]
 [ext_resource type="PackedScene" uid="uid://irv4jj3rbfkb" path="res://scenes/character.tscn" id="3_1omgg"]
+[ext_resource type="Script" path="res://scripts/character.gd" id="4_4jrth"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_unopi"]
 texture = ExtResource("2_1fauo")
@@ -266,3 +267,5 @@ tile_set = SubResource("TileSet_8nhnd")
 
 [node name="Character" parent="." instance=ExtResource("3_1omgg")]
 position = Vector2(361, 283)
+script = ExtResource("4_4jrth")
+move_speed = 200.0

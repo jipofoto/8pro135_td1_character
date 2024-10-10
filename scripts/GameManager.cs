@@ -10,6 +10,8 @@ public partial class GameManager : MainLoop
 	private LevelManager _levelManager;
 	private SaveManager _saveManager;
 
+	private string _scenePath;
+
 	public static GameManager Get()
 	{
 		if (_instance == null)
@@ -36,11 +38,12 @@ public partial class GameManager : MainLoop
 		}
 		return _saveManager;
 	}
-	
-	
-	
-	
 
+	public string ScenePath
+	{
+		get { return _scenePath; }
+		set { _scenePath = value; }
+	}	
 	public override void _Initialize()
 	{
 		GD.Print("Initialized:");
@@ -59,6 +62,4 @@ public partial class GameManager : MainLoop
 		GD.Print("Finalized:");
 		GD.Print($"  End Time: {_timeElapsed}");
 	}
-	
-	
 }
