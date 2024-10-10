@@ -10,7 +10,7 @@ public partial class GameManager : SceneTree
 	private LevelManager _levelManager;
 	private SaveManager _saveManager;
 
-	private string _scenePath;
+	private string _scenePath = "res://Scenes/test.tscn";
 
 	public static GameManager Get()
 	{
@@ -48,6 +48,8 @@ public partial class GameManager : SceneTree
 	{
 		GD.Print("Initialized:");
 		GD.Print($"  Starting Time: {_timeElapsed}");
+		_levelManager = GetLevelManager();
+		_levelManager.LoadLevel(_scenePath);
 	}
 
 	public override bool _Process(double delta)
