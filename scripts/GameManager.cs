@@ -1,22 +1,64 @@
 using Godot;
+using System;
 
-namespace DefaultNamespace;
-
-public class GameManager : MainLoop
+[GlobalClass]
+public partial class GameManager : MainLoop
 {
+	private double _timeElapsed = 0;
+	
 	private static GameManager _instance;
 	private LevelManager _levelManager;
 	private SaveManager _saveManager;
 
-	public override void _Ready()
+	public static GameManager Get()
 	{
-		_instance = this;
-		
+		if (_instance == null)
+		{
+			_instance = new GameManager();
+		}
+		return _instance;
+	}
+
+	public LevelManager GetLevelManager()
+	{
+		if (_levelManager == null)
+		{
+			_levelManager = new LevelManager();
+		}
+		return _levelManager;
+	}
+
+	public SaveManager GetSaveManager()
+	{
+		if (_saveManager == null)
+		{
+			_saveManager = new SaveManager();
+		}
+		return _saveManager;
 	}
 	
-	public LevelManager GetLevelManager() => _levelManager;
 	
-	public SaveManager GetSaveManager() => _saveManager;
+	
+	
 
+	public override void _Initialize()
+	{
+		GD.Print("Initialized:");
+		GD.Print($"  Starting Time: {_timeElapsed}");
+	}
 
+	public override bool _Process(double delta)
+	{
+		_timeElapsed += delta;
+		// Return true to end the main loop.
+		return Input.GetMouseButtonMask() != 0 || Input.IsKeyPressed(Key.Escape);
+	}
+
+	private void _Finalize()
+	{
+		GD.Print("Finalized:");
+		GD.Print($"  End Time: {_timeElapsed}");
+	}
+	
+	
 }

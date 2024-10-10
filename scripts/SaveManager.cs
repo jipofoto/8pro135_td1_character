@@ -1,8 +1,6 @@
 using Godot;
 
-namespace DefaultNamespace;
-
-public class SaveManager : GameManager
+public partial class SaveManager : Node
 {
 	
 }
