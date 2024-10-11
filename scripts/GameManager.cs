@@ -4,57 +4,57 @@ using System;
 [GlobalClass]
 public partial class GameManager : SceneTree
 {
-	private double _timeElapsed = 0;
+	private double timeElapsed = 0;
 	
-	private static GameManager _instance;
-	private LevelManager _levelManager;
-	private SaveManager _saveManager;
+	private static GameManager instance;
+	private LevelManager levelManager;
+	private SaveManager saveManager;
 
-	private string _scenePath = "res://Scenes/test.tscn";
+	private string scenePath = "res://Scenes/test.tscn";
 
 	public static GameManager Get()
 	{
-		if (_instance == null)
+		if (instance == null)
 		{
-			_instance = new GameManager();
+			instance = new GameManager();
 		}
-		return _instance;
+		return instance;
 	}
 
 	public LevelManager GetLevelManager()
 	{
-		if (_levelManager == null)
+		if (levelManager == null)
 		{
-			_levelManager = new LevelManager();
+			levelManager = new LevelManager();
 		}
-		return _levelManager;
+		return levelManager;
 	}
 
 	public SaveManager GetSaveManager()
 	{
-		if (_saveManager == null)
+		if (saveManager == null)
 		{
-			_saveManager = new SaveManager();
+			saveManager = new SaveManager();
 		}
-		return _saveManager;
+		return saveManager;
 	}
 
 	public string ScenePath
 	{
-		get { return _scenePath; }
-		set { _scenePath = value; }
+		get { return scenePath; }
+		set { scenePath = value; }
 	}	
 	public override void _Initialize()
 	{
 		GD.Print("Initialized:");
-		GD.Print($"  Starting Time: {_timeElapsed}");
-		_levelManager = GetLevelManager();
-		_levelManager.LoadLevel(_scenePath);
+		GD.Print($"  Starting Time: {timeElapsed}");
+		levelManager = GetLevelManager();
+		levelManager.LoadLevel(scenePath);
 	}
 
 	public override bool _Process(double delta)
 	{
-		_timeElapsed += delta;
+		timeElapsed += delta;
 		// Return true to end the main loop.
 		return Input.GetMouseButtonMask() != 0 || Input.IsKeyPressed(Key.Escape);
 	}
@@ -62,6 +62,6 @@ public partial class GameManager : SceneTree
 	private void _Finalize()
 	{
 		GD.Print("Finalized:");
-		GD.Print($"  End Time: {_timeElapsed}");
+		GD.Print($"  End Time: {timeElapsed}");
 	}
 }
