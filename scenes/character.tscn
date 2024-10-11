@@ -114,7 +114,7 @@ animations = [{
 radius = 4.0
 height = 20.0
 
-[node name="Character" type="CharacterBody2D"]
+[node name="Character" type="CharacterBody2D" groups=["Persist"]]
 script = ExtResource("1_wjt74")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
