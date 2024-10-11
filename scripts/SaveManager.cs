@@ -11,7 +11,7 @@ public partial class SaveManager : Node
 	{
 		try
 		{
-			using var saveFile = FileAccess.Open("res://savegame.save", FileAccess.ModeFlags.Write);
+			using var saveFile = FileAccess.Open("user://savegame.save", FileAccess.ModeFlags.Write);
 
 			var saveNodes = GetTree().GetNodesInGroup("Persist");
 			foreach (Node saveNode in saveNodes)
@@ -46,66 +46,67 @@ public partial class SaveManager : Node
 		}
 	}
 
-		// Note: This can be called from anywhere inside the tree. This function is
-		// path independent.
-		public void LoadGame()
-{
-    try
-    {
-        if (!FileAccess.FileExists("res://savegame.save"))
-        {
-            GD.PrintErr("No savegame.save file found. Starting a new game.");
-            return;
-        }
+	// Note: This can be called from anywhere inside the tree. This function is
+	// path independent.
+	public void LoadGame()
+	{
+	    try
+	    {
+	        if (!FileAccess.FileExists("user://savegame.save"))
+	        {
+	            GD.PrintErr("No savegame.save file found. Starting a new game.");
+	            return;
+	        }
 
-        // We need to revert the game state so we're not cloning objects during loading.
-        var saveNodes = GetTree().GetNodesInGroup("Persist");
-        foreach (Node saveNode in saveNodes)
-        {
-            saveNode.QueueFree();
-        }
+	        // We need to revert the game state so we're not cloning objects during loading.
+	        var saveNodes = GetTree().GetNodesInGroup("Persist");
+	        foreach (Node saveNode in saveNodes)
+	        {
+	            saveNode.QueueFree();
+	        }
 
-        // Load the file line by line and process that dictionary to restore the object
-        // it represents.
-        using var saveFile = FileAccess.Open("res://savegame.save", FileAccess.ModeFlags.Read);
+	        // Load the file line by line and process that dictionary to restore the object
+	        // it represents.
+	        using var saveFile = FileAccess.Open("user://savegame.save", FileAccess.ModeFlags.Read);
 
-        while (saveFile.GetPosition() < saveFile.GetLength())
-        {
-            var jsonString = saveFile.GetLine();
+	        while (saveFile.GetPosition() < saveFile.GetLength())
+	        {
+	            var jsonString = saveFile.GetLine();
 
-            // Creates the helper class to interact with JSON.
-            var json = new Json();
-            var parseResult = json.Parse(jsonString);
-            if (parseResult != Error.Ok)
-            {
-                GD.PrintErr($"JSON Parse Error: {json.GetErrorMessage()} in {jsonString} at line {json.GetErrorLine()}");
-                continue;
-            }
+	            // Creates the helper class to interact with JSON.
+	            var json = new Json();
+	            var parseResult = json.Parse(jsonString);
+	            if (parseResult != Error.Ok)
+	            {
+	                GD.PrintErr($"JSON Parse Error: {json.GetErrorMessage()} in {jsonString} at line {json.GetErrorLine()}");
+	                continue;
+	            }
 
-            // Get the data from the JSON object.
-            var nodeData = new Godot.Collections.Dictionary<string, Variant>((Godot.Collections.Dictionary)json.Data);
+	            // Get the data from the JSON object.
+	            var nodeData = new Godot.Collections.Dictionary<string, Variant>((Godot.Collections.Dictionary)json.Data);
 
-            // Firstly, we need to create the object and add it to the tree and set its position.
-            var newObjectScene = GD.Load<PackedScene>(nodeData["Filename"].ToString());
-            var newObject = newObjectScene.Instantiate<Node>();
-            GetNode(nodeData["Parent"].ToString()).AddChild(newObject);
-            newObject.Set(Node2D.PropertyName.Position, new Vector2((float)nodeData["PosX"], (float)nodeData["PosY"]));
+	            // Firstly, we need to create the object and add it to the tree and set its position.
+	            var newObjectScene = GD.Load<PackedScene>(nodeData["Filename"].ToString());
+	            var newObject = newObjectScene.Instantiate<Node>();
+	            GetNode(nodeData["Parent"].ToString()).AddChild(newObject);
+	            newObject.Set(Node2D.PropertyName.Position, (Vector2)nodeData["Position"]);
 
-            // Now we set the remaining variables.
-            foreach (var (key, value) in nodeData)
-            {
-                if (key == "Filename" || key == "Parent" || key == "PosX" || key == "PosY")
-                {
-                    continue;
-                }
-                newObject.Set(key, value);
-            }
-        }
-    }
-    catch (Exception ex)
-    {
-        GD.PrintErr($"Error while loading game: {ex.Message}");
-    }
-}
+
+	            // Now we set the remaining variables.
+	            foreach (var (key, value) in nodeData)
+	            {
+	                if (key == "Filename" || key == "Parent" || key == "PosX" || key == "PosY")
+	                {
+	                    continue;
+	                }
+	                newObject.Set(key, value);
+	            }
+	        }
+	    }
+	    catch (Exception ex)
+	    {
+	        GD.PrintErr($"Error while loading game: {ex.Message}");
+	    }
+	}
 
 }

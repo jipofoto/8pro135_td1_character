@@ -62,4 +62,15 @@ public partial class Character : CharacterBody2D
 		Velocity = velocity;
 		MoveAndSlide();
 	}
+	public Godot.Collections.Dictionary<string, Variant> Save()
+	{
+		return new Godot.Collections.Dictionary<string, Variant>()
+		{
+			{ "Filename", SceneFilePath },
+			{ "Parent", GetParent().GetPath() },
+			{ "Position", Position },
+			{ "MoveSpeed", MoveSpeed },
+			// Add any other variables that you want to save here
+		};
+	}
 }
