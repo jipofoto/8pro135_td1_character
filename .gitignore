@@ -3,5 +3,8 @@
 *.csproj
 #Rider
 .godot/
+#VsCode
+.vscode/
 #Godot
 .idea/
+*.import
