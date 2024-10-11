@@ -1,5 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://cnvh6qdsv5n3f"]
+[gd_scene load_steps=8 format=3 uid="uid://cnvh6qdsv5n3f"]
 
+[ext_resource type="Script" path="res://scripts/Game.cs" id="1_og7ub"]
 [ext_resource type="Texture2D" uid="uid://3lqxdi8wgf6g" path="res://assets/Dungeon_Tileset.png" id="2_50g2q"]
 [ext_resource type="PackedScene" uid="uid://irv4jj3rbfkb" path="res://scenes/character.tscn" id="3_tve5r"]
 
@@ -252,6 +253,7 @@ texture = ExtResource("2_50g2q")
 sources/0 = SubResource("TileSetAtlasSource_sihgk")
 
 [node name="game" type="Node"]
+script = ExtResource("1_og7ub")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_ka2id")
@@ -287,6 +289,7 @@ offset_left = 181.0
 offset_top = -215.0
 offset_right = 225.0
 offset_bottom = -184.0
+action_mode = 0
 text = "Save"
 
 [node name="Load" type="Button" parent="CanvasLayer/Control"]
@@ -304,3 +307,7 @@ offset_top = -215.0
 offset_right = 328.0
 offset_bottom = -184.0
 text = "Quit"
+
+[connection signal="pressed" from="CanvasLayer/Control/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/Load" to="." method="_on_load_pressed"]
+[connection signal="pressed" from="CanvasLayer/Control/Quit" to="." method="_on_quit_pressed"]
