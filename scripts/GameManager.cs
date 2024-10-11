@@ -53,8 +53,8 @@ public partial class GameManager : SceneTree
 		GD.Print($"  Starting Time: {timeElapsed}");
 		levelManager = GetLevelManager();
 		levelManager.LoadLevel(scenePath);
-
-		// menuCanvasLayer = GetTree().Root.GetNode<CanvasLayer>("MenuCanvasLayer");
+	
+		// menuCanvasLayer = GetTree().GetNode<CanvasLayer>("MenuCanvasLayer");
 		menuCanvasLayer.Hide();
 	}
 	public override bool _Process(double delta)
@@ -72,13 +72,20 @@ public partial class GameManager : SceneTree
 			{
 				menuCanvasLayer.Hide();
 			}
+			if (Input.IsActionJustPressed("quit"))
+			{
+				QuitGame();
+			}
+
+			// Return true to end the main loop.
+			return Input.GetMouseButtonMask() != 0 || Input.IsKeyPressed(Key.Escape);
 		}
 
 		// Return true to end the main loop.
 		return Input.GetMouseButtonMask() != 0 || Input.IsKeyPressed(Key.Escape);
 	}
 
-	private void _Finalize()
+	public override void _Finalize()
 	{
 		GD.Print("Finalized:");
 		GD.Print($"  End Time: {timeElapsed}");
@@ -102,4 +109,4 @@ public partial class GameManager : SceneTree
 	{
 		// GetTree().Quit();
 	}
-}
+	}
