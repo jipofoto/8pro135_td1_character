@@ -304,5 +304,3 @@ offset_top = -215.0
 offset_right = 328.0
 offset_bottom = -184.0
 text = "Quit"
-
-[connection signal="pressed" from="CanvasLayer/Control/Save" to="Character" method="_on_save_pressed"]

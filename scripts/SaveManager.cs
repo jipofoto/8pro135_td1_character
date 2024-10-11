@@ -11,7 +11,7 @@ public partial class SaveManager : Node
 	{
 		try
 		{
-			using var saveFile = FileAccess.Open("user://savegame.save", FileAccess.ModeFlags.Write);
+			using var saveFile = FileAccess.Open("res://savegame.save", FileAccess.ModeFlags.Write);
 
 			var saveNodes = GetTree().GetNodesInGroup("Persist");
 			foreach (Node saveNode in saveNodes)
@@ -52,7 +52,7 @@ public partial class SaveManager : Node
 {
     try
     {
-        if (!FileAccess.FileExists("user://savegame.save"))
+        if (!FileAccess.FileExists("res://savegame.save"))
         {
             GD.PrintErr("No savegame.save file found. Starting a new game.");
             return;
@@ -67,7 +67,7 @@ public partial class SaveManager : Node
 
         // Load the file line by line and process that dictionary to restore the object
         // it represents.
-        using var saveFile = FileAccess.Open("user://savegame.save", FileAccess.ModeFlags.Read);
+        using var saveFile = FileAccess.Open("res://savegame.save", FileAccess.ModeFlags.Read);
 
         while (saveFile.GetPosition() < saveFile.GetLength())
         {

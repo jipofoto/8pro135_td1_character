@@ -12,7 +12,7 @@ public partial class GameManager : SceneTree
 	private SaveManager saveManager;
 	private CanvasLayer menuCanvasLayer;
 
-	private string scenePath;
+	private string scenePath = "res://Scenes/game.tscn";
 
 	public static GameManager Get()
 	{

@@ -1,7 +1,7 @@
 [gd_scene load_steps=17 format=3 uid="uid://irv4jj3rbfkb"]
 
+[ext_resource type="Script" path="res://scripts/Character.cs" id="1_0ifop"]
 [ext_resource type="Texture2D" uid="uid://dh0xg48o1ds61" path="res://assets/ranger_f.png" id="1_bd1yd"]
-[ext_resource type="Script" path="res://scripts/character.gd" id="1_wjt74"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_cwfej"]
 atlas = ExtResource("1_bd1yd")
@@ -115,7 +115,7 @@ radius = 4.0
 height = 20.0
 
 [node name="Character" type="CharacterBody2D" groups=["Persist"]]
-script = ExtResource("1_wjt74")
+script = ExtResource("1_0ifop")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -11)

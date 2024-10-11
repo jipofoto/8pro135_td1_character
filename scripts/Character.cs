@@ -6,41 +6,57 @@ public partial class Character : CharacterBody2D
 	[Export]
 	public float MoveSpeed = 200;
 
-	public override void _PhysicsProcess(double delta)
+	public override void _Process(double delta)
 	{
-		Vector2 inputDirection = new Vector2(
-			Input.GetActionStrength("move_right") - Input.GetActionStrength("move_left"),
-			Input.GetActionStrength("move_down") - Input.GetActionStrength("move_up")
-		);
+		var velocity = Vector2.Zero; // The player's movement vector.
 
-		// Update velocity
-		Vector2 velocity = inputDirection * MoveSpeed;
+		if (Input.IsActionPressed("move_right"))
+		{
+			velocity.X += 1;
+		}
+
+		if (Input.IsActionPressed("move_left"))
+		{
+			velocity.X -= 1;
+		}
+
+		if (Input.IsActionPressed("move_down"))
+		{
+			velocity.Y += 1;
+		}
+
+		if (Input.IsActionPressed("move_up"))
+		{
+			velocity.Y -= 1;
+		}
+
+		var animatedSprite2D = GetNode<AnimatedSprite2D>("AnimatedSprite2D");
 
 		if (velocity.Length() > 0)
 		{
 			velocity = velocity.Normalized() * MoveSpeed;
-			GetNode<AnimationPlayer>("AnimatedSprite2D").Play();
+			animatedSprite2D.Play();
+
+			if (velocity.X < 0)
+			{
+				animatedSprite2D.Animation = "move_left";
+			}
+			else if (velocity.X > 0)
+			{
+				animatedSprite2D.Animation = "move_right";
+			}
+			else if (velocity.Y < 0)
+			{
+				animatedSprite2D.Animation = "move_up";
+			}
+			else if (velocity.Y > 0)
+			{
+				animatedSprite2D.Animation = "move_down";
+			}
 		}
 		else
 		{
-			GetNode<AnimationPlayer>("AnimatedSprite2D").Stop();
-		}
-
-		if (velocity.X < 0)
-		{
-			GetNode<AnimationPlayer>("AnimatedSprite2D").Play("move_left");
-		}
-		if (velocity.X > 0)
-		{
-			GetNode<AnimationPlayer>("AnimatedSprite2D").Play("move_right");
-		}
-		if (velocity.Y < 0)
-		{
-			GetNode<AnimationPlayer>("AnimatedSprite2D").Play("move_up");
-		}
-		if (velocity.Y > 0)
-		{
-			GetNode<AnimationPlayer>("AnimatedSprite2D").Play("move_down");
+			animatedSprite2D.Stop();
 		}
 
 		Velocity = velocity;
